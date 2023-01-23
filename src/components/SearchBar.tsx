@@ -9,7 +9,8 @@ const SearchBar = () => {
     const [randomResult, setRandomResult] = useState<resultProps | null>(null);
     const [header, setHeader] = useState("defaultHeader");
     const [searchBar, setSearchBar] = useState("defaultSearchBar");
-    // const [result, setResult] = useState<resultProps[]>([]);
+    const [searchInput, setSearchInput] = useState("");
+    const [searchResults, setSearchResults] = useState("hidden");
 
     useEffect(() => {
         const randomAPI = async () => {
@@ -27,7 +28,8 @@ const SearchBar = () => {
         if (event.key === 'Enter') {
             setHeader("searchedHeader");
             setSearchBar("searchedSearchBar");
-
+            setSearchResults("searchResults");
+            mainAPI();
 
             let randomQuote = document.getElementById("randomQuote");
             if (randomQuote != null) {
@@ -47,8 +49,8 @@ const SearchBar = () => {
 
     const [result, setResult] = useState<resultProps[]>([]);
     const [] = useState("hidden");
-    useEffect(() => {
-        let query = "https://usu-quotes-mimic.vercel.app/api/search?query=" + "Thomas Jefferson";
+        let query = `https://usu-quotes-mimic.vercel.app/api/search?query=${searchInput}`;
+
         const mainAPI = async () => {
             const data = await fetch(query, {
                 method: "GET"
@@ -57,26 +59,21 @@ const SearchBar = () => {
             setResult(jsonData.results);
         };
 
-        mainAPI();
-    }, []);
-
 
     return (
         <>  <header className={header}>Quote Search</header>
-                <input className={searchBar} type="text" onKeyDown={handleKeyDown} placeholder="Albert Einstein"/>
+            <input className={searchBar} type="text" onKeyDown={handleKeyDown} onChange={(e) => setSearchInput(e.target.value)} placeholder="Albert Einstein"/>
             <div id="searchResults">
                 <div className="randomQuote" id="randomQuote">{randomResult?.content} - {randomResult?.author}</div>
                 <div>
                     {result.map((value) => {
                         return (
-                            <div className="hidden">
-                                <div>{value.content}</div>
-                                <div>{value.author}</div>
+                            <div className={searchResults}>
+                                <div>{value.content} - {value.author}</div>
                             </div>
                         );
                     })}
                 </div>
-
             </div>
         </>
     )

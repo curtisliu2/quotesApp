@@ -10,12 +10,9 @@
 }
 
 .searchResults{
-  position: fixed;
-  top:0;
-  left:0;
+  alignment: left;
+  padding: 20px;
 }
-
-
 
 .defaultHeader{
   font-size: 25px;
@@ -51,8 +48,8 @@ input {
 
 .searchedSearchBar{
   position: fixed;
-  top:50px;
-  left:10px;
+  top: 50px;
+  left: 10px;
   width: 75%;
 
 }
