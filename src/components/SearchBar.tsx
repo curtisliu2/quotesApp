@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 
-
 type resultProps = {
     content: string;
     author: string;
 };
 
 const SearchBar = () => {
-    const [randomResult, setRandomResult] = useState<resultProps[]>([]);
+    const [randomResult, setRandomResult] = useState<resultProps | null>(null);
     const [header, setHeader] = useState("defaultHeader");
     const [searchBar, setSearchBar] = useState("defaultSearchBar");
     // const [result, setResult] = useState<resultProps[]>([]);
@@ -66,7 +65,7 @@ const SearchBar = () => {
         <>  <header className={header}>Quote Search</header>
                 <input className={searchBar} type="text" onKeyDown={handleKeyDown} placeholder="Albert Einstein"/>
             <div id="searchResults">
-                <div className="randomQuote" id="randomQuote">{randomResult.content} - {randomResult.author}</div>
+                <div className="randomQuote" id="randomQuote">{randomResult?.content} - {randomResult?.author}</div>
                 <div>
                     {result.map((value) => {
                         return (
