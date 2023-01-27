@@ -68,8 +68,9 @@ const SearchBar = () => {
                 <div>
                     {result.map((value) => {
                         return (
+
                             <div className={searchResults}>
-                                <div>{value.content} - {value.author}</div>
+                                <div className="cool">{value.content} - {value.author}</div>
                             </div>
                         );
                     })}
